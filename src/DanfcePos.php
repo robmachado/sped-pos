@@ -178,8 +178,18 @@ class DanfcePos
             $linha->descricao = $this->strPad($xProd, 19, ' ');
             $linha->quantidade = $this->strPad($qCom, 5, ' ');
             $linha->unidade = $this->strPad($uCom, 3, ' ');
-            $linha->valor_unit = $this->strPad(number_format($vUnCom, 2, ',', '.'), 7, ' ', STR_PAD_LEFT);
-            $linha->valor_total = $this->strPad(number_format($vProd, 2, ',', '.'), 8, ' ', STR_PAD_LEFT);
+            $linha->valor_unit = $this->strPad(
+                number_format($vUnCom, 2, ',', '.'),
+                7,
+                ' ',
+                STR_PAD_LEFT
+            );
+            $linha->valor_total = $this->strPad(
+                number_format($vProd, 2, ',', '.'),
+                8,
+                ' ',
+                STR_PAD_LEFT
+            );
             // Imprimir linha
             $this->printer->text(
                 $linha->cod . $linha->descricao . $linha->quantidade
@@ -203,7 +213,17 @@ class DanfcePos
             " ",
             STR_PAD_LEFT
         )
-        . str_pad("R$" . number_format((float) $this->nfce->infNFe->total->ICMSTot->vProd, 2, ',', '.'), 17, " ", STR_PAD_LEFT);
+        . str_pad(
+            "R$" . number_format(
+                (float) $this->nfce->infNFe->total->ICMSTot->vProd,
+                2,
+                ',',
+                '.'
+            ),
+            17,
+            " ",
+            STR_PAD_LEFT
+        );
         $this->printer->text($printtot . "\n");
         $printtotdesc = str_pad(
             (string) "Desconto:",
@@ -211,7 +231,17 @@ class DanfcePos
             " ",
             STR_PAD_LEFT
         )
-        . str_pad("R$" . number_format((float) $this->nfce->infNFe->total->ICMSTot->vDesc, 2, ',', '.'), 17, " ", STR_PAD_LEFT);
+        . str_pad(
+            "R$" . number_format(
+                (float) $this->nfce->infNFe->total->ICMSTot->vDesc,
+                2,
+                ',',
+                '.'
+            ),
+            17,
+            " ",
+            STR_PAD_LEFT
+        );
         $this->printer->text($printtotdesc . "\n");
         $printtot = str_pad(
             (string) "Total:",
@@ -219,11 +249,20 @@ class DanfcePos
             " ",
             STR_PAD_LEFT
         )
-        . str_pad("R$" . number_format((float) $this->nfce->infNFe->total->ICMSTot->vNF, 2, ',', '.'), 17, " ", STR_PAD_LEFT);
+        . str_pad(
+            "R$" . number_format(
+                (float) $this->nfce->infNFe->total->ICMSTot->vNF,
+                2,
+                ',',
+                '.'
+            ),
+            17,
+            " ",
+            STR_PAD_LEFT
+        );
         $this->printer->setEmphasis(true);
         $this->printer->text($printtot . "\n");
         $this->printer->setEmphasis(false);
-
     }
 
     /**
@@ -258,7 +297,17 @@ class DanfcePos
             " ",
             STR_PAD_LEFT
         )
-        . str_pad("R$" . number_format((float) $this->nfce->infNFe->pag->vTroco, 2, ',', '.'), 17, " ", STR_PAD_LEFT);
+        . str_pad(
+            "R$" . number_format(
+                (float) $this->nfce->infNFe->pag->vTroco,
+                2,
+                ',',
+                '.'
+            ),
+            17,
+            " ",
+            STR_PAD_LEFT
+        );
         $this->printer->text($printtroco . "\n");
     }
 
@@ -271,7 +320,12 @@ class DanfcePos
         $this->printer->setJustification(Printer::JUSTIFY_CENTER);
         $vTotTrib = (float) $this->nfce->infNFe->total->ICMSTot->vTotTrib;
         $printimp = $this->strPad("Informação dos Tributos Incidentes:", 35, " ")
-        . str_pad("R$" . number_format($vTotTrib, 2, ',', '.'), 13, " ", STR_PAD_LEFT);
+        . str_pad(
+            "R$" . number_format($vTotTrib, 2, ',', '.'),
+            13,
+            " ",
+            STR_PAD_LEFT
+        );
         $this->printer->text($printimp . "\n");
         $this->printer->setJustification(Printer::JUSTIFY_CENTER);
         $this->printer->text("Fonte IBPT - Lei Federal 12.741/2012\n");
@@ -316,7 +370,12 @@ class DanfcePos
         $linha = new \stdClass();
         $linha->numero = $this->strPad("NFCe: " . preg_replace("/[^0-9]/", "", $nNF), 15);
         $linha->serie = $this->strPad("Série: " . $serie, 10);
-        $linha->data = $this->strPad(date('d/m/Y H:i:s', strtotime($dhEmi)), 23, ' ', STR_PAD_LEFT);
+        $linha->data = $this->strPad(
+            date('d/m/Y H:i:s', strtotime($dhEmi)),
+            23,
+            ' ',
+            STR_PAD_LEFT
+        );
         $this->printer->text($linha->numero . $linha->serie . $linha->data . "\n");
         $this->printer->setJustification(Printer::JUSTIFY_CENTER);
         $this->printer->text("Consulte pela chave de acesso em ");
